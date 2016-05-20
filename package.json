@@ -1,6 +1,6 @@
 {
   "name": "gfwupdate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "gfwlist auto update",
   "main": "index.js",
   "bin": {

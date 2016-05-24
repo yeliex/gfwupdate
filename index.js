@@ -12,20 +12,29 @@ if (os.platform() != "darwin") {
 
 (function () {
   console.log();
-  console.log(new Date(), "更新git仓库");
-  console.log();
+  console.log(new Date(), "更新文件");
 
-  const child = childProcess.spawn("git", ["pull"], {
-    cwd: __dirname + "/gfwlist"
+  const fileName = Date.parse(new Date()) + ".txt";
+  const dirName = os.tmpdir() + "/gfwupdate/";
+
+  try {
+    fs.mkdirSync(dirName);
+  }
+  catch (e) {
+
+  }
+
+  const child = childProcess.spawn("wget", ["https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt", "-O", fileName], {
+    cwd: dirName
   });
 
-  child.stdout.on("data", function (data) {
-    console.log(data.toString("utf-8"));
-  });
+  // child.stdout.on("data", function (data) {
+  //   console.log(data.toString("utf-8"));
+  // });
 
-  child.stderr.on("data", function (data) {
-    console.log(data.toString("utf-8"));
-  });
+  // child.stderr.on("data", function (data) {
+  //   console.log(data.toString("utf-8"));
+  // });
 
   child.on("exit", function (code, signal) {
     if (code != 0) {
@@ -34,7 +43,7 @@ if (os.platform() != "darwin") {
     }
     console.log(new Date(), "更新完成");
     // 开始读取文件
-    var list = fs.readFileSync(__dirname+"/gfwlist/gfwlist.txt", "utf-8");
+    var list = fs.readFileSync(dirName + fileName, "utf-8");
     console.log(new Date(), "解析完成");
     list = new Buffer(list, "base64").toString("utf-8");
 

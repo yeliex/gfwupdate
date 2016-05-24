@@ -7,7 +7,6 @@
     "gfwupdate": "index.js"
   },
   "scripts": {
-    "preinstall": "tar zxvf resource",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

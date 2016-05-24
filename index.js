@@ -16,7 +16,7 @@ if (os.platform() != "darwin") {
   console.log();
 
   const child = childProcess.spawn("git", ["pull"], {
-    cwd: process.cwd() + "/gfwlist"
+    cwd: __dirname + "/gfwlist"
   });
 
   child.stdout.on("data", function (data) {
@@ -34,7 +34,7 @@ if (os.platform() != "darwin") {
     }
     console.log(new Date(), "更新完成");
     // 开始读取文件
-    var list = fs.readFileSync("./gfwlist/gfwlist.txt", "utf-8");
+    var list = fs.readFileSync(__dirname+"/gfwlist/gfwlist.txt", "utf-8");
     console.log(new Date(), "解析完成");
     list = new Buffer(list, "base64").toString("utf-8");
 
